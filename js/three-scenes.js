@@ -152,7 +152,7 @@
     s.scene.background = new T.Color(0xe9a672);
     s.add(W.sky({ top: 0x2c3262, mid: 0xe0865a, bottom: 0xf3c37a, sun: [-1, 0.2, -0.25], sunColor: 0xffd9a0, sunSize: 180 }));
     s.add(W.ground({ a: "#bd9462", b: "#6c4f31", rep: 70 })); s.add(W.hills(0x6a5a4a, 14, 190));
-    const armyCount = low() ? 66 : 132;
+    const armyCount = low() ? 22 : 44;
     const a1 = W.army(armyCount, { x: -34, z: -14 }, 0xcfc3a3, Math.PI / 2); a1.rotation.y = 0; s.add(a1);
     const a2 = W.army(armyCount, { x: 34, z: -14 }, 0x8f3a2a, -Math.PI / 2); s.add(a2);
     const ch = W.chariot(); s.add(ch); s.chariot = ch;
@@ -161,7 +161,7 @@
     [-1.2, -0.4, 0.4, 1.2].forEach((x) => s.scene.add(MN3D.geo.tube([[0.2 + x * 0.05, 1.42, 0.9], [x * 0.6, 1.75, 2.8], [x, 2.1, 4.9]], 0.007, M.gold, 12)));
     const K = s.fig("krishna", {}, [0.25, 0.63, 0.35], 0, "reins");
     const A = s.fig("arjuna", {}, [-0.35, 0.63, -0.25], 0.32, "bow_hold");
-    s.add(W.dust(low() ? 150 : 320, [60, 14, 60], 0xffd9a0, 0.09));
+    s.add(W.dust(low() ? 50 : 110, [60, 14, 60], 0xffd9a0, 0.09));
     const light = new T.SpotLight(0xffe2a8, 0, 30, 0.4, 0.6, 1.2); light.position.set(2, 14, 6); light.target.position.set(0, 1.6, 0.3); s.scene.add(light, light.target); light.castShadow = false;
     s.react = function (key) {
       s.resetMood(); light.intensity = 0; const kp = K.userData, ap = A.userData; kp.pose("reins", 4); ap.pose("bow_hold", 4); kp.set({ yaw: 0 }); ap.set({ yaw: 0.32 });
@@ -190,15 +190,15 @@
     [-6, 6].forEach((x) => { const l = W.lamp(); l.position.set(x, 6.4, -2); l.userData.base = 2.0; s.add(l); });
     const l3 = W.lamp(); l3.position.set(0, 6.4, -8); l3.userData.base = 2.4; s.add(l3);
     const sh = W.shaft(0xffe0a8, 2.2, 8, 0.07); sh.position.set(-5, 4, -4); sh.rotation.z = -0.25; s.add(sh);
-    s.add(W.dust(low() ? 120 : 260, [18, 8, 22], 0xffe2a8, 0.07));
+    s.add(W.dust(low() ? 40 : 90, [18, 8, 22], 0xffe2a8, 0.07));
 
     const D = s.fig("dhritarashtra", {}, [0, 0.99, -11.4], 0, "rest");
     const B = s.fig("bhishma", {}, [-4.1, 0, -6.4], 0.3, "base");
     const V = s.fig("vidura", {}, [4.1, 0, -6.4], -0.3, "base");
     const Du = s.fig("duryodhana", {}, [-2.5, 0, -1.1], 0.55, "mace");
     const K = s.fig("krishna", {}, [0.2, 0, 1.3], 2.7, "folded");
-    [[-6.2, -3.8, 1.15], [6.2, -3.8, -1.15], [-6.2, 0.2, 1.15], [6.2, 0.2, -1.15]].forEach((p, i) => s.fig("king", { lite: true, key: "k" + i, cloth: [0xd5c08a, 0xb78a4a, 0xc8b074, 0x9aa070][i], gem: [0x8a2a2a, 0x2d8a5a, 0x2a7fd4, 0xe0a21a][i] }, [p[0], 0.03, p[1]], p[2], "rest"));
-    const kings = ["k0", "k1", "k2", "k3"].map((k) => s.figs[k]);
+    [[-6.2, -3.8, 1.15], [6.2, -3.8, -1.15]].forEach((p, i) => s.fig("king", { lite: true, key: "k" + i, cloth: [0xd5c08a, 0xb78a4a, 0xc8b074, 0x9aa070][i], gem: [0x8a2a2a, 0x2d8a5a, 0x2a7fd4, 0xe0a21a][i] }, [p[0], 0.03, p[1]], p[2], "rest"));
+    const kings = ["k0", "k1"].map((k) => s.figs[k]);
 
     s.react = function (key) {
       s.resetMood(); const reset = () => { [B, V, D, Du, K].forEach((f) => f.userData.pose("base", 4)); D.userData.pose("rest", 4); Du.userData.pose("mace", 4); Du.userData.set({ yaw: 0.55 }); K.userData.set({ yaw: 2.7 }); B.userData.set({ yaw: 0.3 }); V.userData.set({ yaw: -0.3 }); };
@@ -242,7 +242,7 @@
     function roll() { dState.t = 0; dState.a.set(Math.random() * 6, Math.random() * 6, Math.random() * 6); dState.b.set(Math.random() * 6, Math.random() * 6, Math.random() * 6); }
     d1.position.set(-0.25, 0.52, 0.1); d2.position.set(0.2, 0.52, -0.1);
     [-1, 1].forEach((x, i) => { const l = W.lamp(); l.position.set(x * 5, 6, -1 + i); l.userData.base = 2.2; s.add(l); });
-    s.add(W.dust(low() ? 100 : 220, [16, 7, 20], 0xffe2a8, 0.06));
+    s.add(W.dust(low() ? 40 : 80, [16, 7, 20], 0xffe2a8, 0.06));
 
     const Y = s.fig("yudhishthira", { seated: true, scale: 0.93 }, [-2.0, 0.03, 0.15], Math.PI / 2, "rest");
     const S = s.fig("shakuni", {}, [2.0, 0.03, 0.15], -Math.PI / 2, "rest");
@@ -250,7 +250,7 @@
     const V = s.fig("vidura", {}, [-3.6, 0, -3.0], 0.55, "base");
     const Dh = s.fig("dhritarashtra", {}, [0, 0.9, -9.9], 0, "rest");
     const kings = [];
-    [[-7, -3, 1.4], [7, -3, -1.4], [-7, 2.5, 1.4], [7, 2.5, -1.4], [-6.4, -7, 0.8], [6.4, -7, -0.8]].forEach((p, i) => kings.push(s.fig("king", { lite: true, key: "k" + i, cloth: [0xd5c08a, 0xb78a4a, 0xc8b074, 0x9aa070, 0xa9805a, 0xd1b98a][i], gem: [0x8a2a2a, 0x2d8a5a, 0x2a7fd4, 0xe0a21a, 0x8a2a2a, 0x2d8a5a][i] }, [p[0], 0.03, p[1]], p[2], "rest")));
+    [[-6.5, -2, 1.4], [6.5, -2, -1.4]].forEach((p, i) => kings.push(s.fig("king", { lite: true, key: "k" + i, cloth: [0xd5c08a, 0xb78a4a, 0xc8b074, 0x9aa070, 0xa9805a, 0xd1b98a][i], gem: [0x8a2a2a, 0x2d8a5a, 0x2a7fd4, 0xe0a21a, 0x8a2a2a, 0x2d8a5a][i] }, [p[0], 0.03, p[1]], p[2], "rest")));
     s.tick = function (dt, t) {
       if (dState.t < 2) {
         dState.t += dt; const k = dState.t / 1.1, h = Math.max(0, Math.sin(Math.min(k, 1) * Math.PI)) * (1 - Math.min(k, 1) * 0.6) * 0.9;
@@ -283,7 +283,7 @@
     s.scene.background = new T.Color(0x1d1612); s.scene.fog = new T.FogExp2(0x1d1612, 0.05);
     const floor = new T.Mesh(new T.CircleGeometry(30, 64), new T.MeshStandardMaterial({ color: MN3D.lin(0x2a2018), roughness: 0.35, metalness: 0.3 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; s.add(floor);
     const halo = new T.Mesh(new T.RingGeometry(2.4, 2.46, 64), new T.MeshBasicMaterial({ color: 0xd9a93a, transparent: true, opacity: 0.5, side: T.DoubleSide })); halo.rotation.x = -Math.PI / 2; halo.position.y = 0.01; s.add(halo);
-    s.add(W.dust(100, [10, 6, 10], 0xffe2a8, 0.05));
+    s.add(W.dust(40, [10, 6, 10], 0xffe2a8, 0.05));
     const slots = []; const spread = ids.length > 1 ? 2.1 : 0;
     ids.forEach((id, i) => {
       const x = (i - (ids.length - 1) / 2) * spread; const ped = W.pedestal(0.75, 0.55); ped.position.set(x, 0, 0); s.add(ped);
